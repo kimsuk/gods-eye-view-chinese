@@ -2,6 +2,8 @@
 
 # 🌐 God's Eye View 汉化版 &nbsp; [English](https://github.com/bilawalsidhu/gods-eye-view/blob/main/README.md)
 
+**直接运行包下载：** [Mac（Apple 芯片）](https://github.com/kimsuk/gods-eye-view-chinese/releases/download/zh-desktop/%E4%B8%8A%E5%B8%9D%E4%B9%8B%E7%9C%BC%E6%B1%89%E5%8C%96%E7%89%88-mac.zip) · [Windows（64 位）](https://github.com/kimsuk/gods-eye-view-chinese/releases/download/zh-desktop/%E4%B8%8A%E5%B8%9D%E4%B9%8B%E7%9C%BC%E6%B1%89%E5%8C%96%E7%89%88-windows.zip)
+
 [![CI](https://github.com/bilawalsidhu/gods-eye-view/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bilawalsidhu/gods-eye-view/actions/workflows/ci.yml) [![Reached #1 on GitHub Trending](https://img.shields.io/badge/%231_GitHub_Trending-thank_you!-F0A63C?style=flat-square&logo=github)](https://x.com/bilawalsidhu/status/2093798887815348521)
 
 ### 浏览器里的间谍卫星模拟器——直到你发现，数据源是公开的，数据是真的。
