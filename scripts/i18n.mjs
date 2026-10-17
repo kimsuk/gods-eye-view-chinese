@@ -5,7 +5,7 @@
 //   npm run i18n -- --missing ru     print what ru lacks, as JSON to translate
 //
 // A translation left as the English fails unless src/i18n/same-as-english.json
-// lists it.
+// or i18n-local/same-as-english.json lists it.
 //
 // Messages are the English literals passed to t(), tn() and msg() in src/,
 // plus the markup opted in with data-i18n* in src/ui/templates and index.html.
@@ -14,6 +14,11 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  overlayCatalogPath,
+  overlayLocaleCodes,
+  overlaySameAsEnglish,
+} from '../i18n-local/paths.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const LOCALES_DIR = path.join(ROOT, 'src/i18n/locales');
@@ -444,7 +449,9 @@ const placeholders = (text) =>
     .join(',');
 
 export function catalogPath(locale) {
-  return path.join(LOCALES_DIR, `${locale}.json`);
+  return (
+    overlayCatalogPath(ROOT, locale) ?? path.join(LOCALES_DIR, `${locale}.json`)
+  );
 }
 
 export function readCatalog(locale) {
@@ -452,15 +459,22 @@ export function readCatalog(locale) {
 }
 
 export function shippedLocales() {
-  return trackedFiles('src/i18n/locales/*.json').map((file) =>
+  const official = trackedFiles('src/i18n/locales/*.json').map((file) =>
     path.basename(file, '.json'),
   );
+  return [
+    ...official,
+    ...overlayLocaleCodes(trackedFiles('i18n-local/*.json')),
+  ];
 }
 
 /** Messages a locale keeps exactly as in English, on purpose. */
 export function readSameAsEnglish(locale) {
   const lists = JSON.parse(readFileSync(SAME_AS_ENGLISH, 'utf8'));
-  return new Set(lists[locale] || []);
+  return new Set([
+    ...(lists[locale] || []),
+    ...overlaySameAsEnglish(ROOT, locale),
+  ]);
 }
 
 /** The English a message shows: its text without the "context|" prefix. */
@@ -473,7 +487,7 @@ const blank = (value) => value.trim() === '';
 const hasLetters = (value) => /\p{L}{2}/u.test(value.replace(/\{[^}]*\}/g, ''));
 
 const STILL_ENGLISH = (text, locale) =>
-  `"${text}" is still English: translate it, or list it under "${locale}" in src/i18n/same-as-english.json`;
+  `"${text}" is still English: translate it, or list it under "${locale}" in src/i18n/same-as-english.json or i18n-local/same-as-english.json`;
 
 /**
  * Compare one catalog with the extracted messages.

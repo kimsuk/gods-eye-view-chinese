@@ -18,8 +18,10 @@ import {
 } from './locale.js';
 import es from './locales/es.json' with { type: 'json' };
 import ru from './locales/ru.json' with { type: 'json' };
+// i18n-local overlay: fork catalogs live outside src/i18n/locales.
+import zh from '../../i18n-local/zh.json' with { type: 'json' };
 
-const CATALOGS = Object.freeze({ es, ru });
+const CATALOGS = Object.freeze({ es, ru, zh });
 
 let currentLocale = DEFAULT_LOCALE;
 

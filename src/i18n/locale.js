@@ -8,13 +8,15 @@ export const LOCALE_STORAGE_KEY = 'gev:locale:v1';
 export const DEFAULT_LOCALE = 'en';
 
 /** Shipped locales; order does not matter. Adding one: docs/TRANSLATORS.md. */
-export const LOCALES = Object.freeze(['en', 'es', 'ru']);
+// i18n-local overlay: `zh` is this fork's catalog (i18n-local/zh.json).
+export const LOCALES = Object.freeze(['en', 'es', 'ru', 'zh']);
 
 /** Each locale named in its own language, for the selector. */
 export const LOCALE_NAMES = Object.freeze({
   en: 'English',
   es: 'Español',
   ru: 'Русский',
+  zh: '中文',
 });
 
 /** Right-to-left locales. */
