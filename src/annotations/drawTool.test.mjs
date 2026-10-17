@@ -140,8 +140,11 @@ test('nothing promises a GeoJSON export for drawn shapes', () => {
   }
   for (const file of ['README.md', 'CHANGELOG.md', 'docs/CURRENT-STATE.md']) {
     const source = read(file);
-    const at = source.indexOf('DISPLAY ▸ **Draw**');
-    const start = at >= 0 ? at : source.indexOf('DISPLAY ▸ Draw');
+    const markers = ['DISPLAY ▸ **Draw**', 'DISPLAY ▸ Draw', '显示 ▸ **绘制**'];
+    const start = markers.reduce(
+      (found, marker) => (found >= 0 ? found : source.indexOf(marker)),
+      -1,
+    );
     assert.ok(start >= 0, `${file} should describe the Draw control`);
     const section = source.slice(start, start + 1200);
     assert.doesNotMatch(

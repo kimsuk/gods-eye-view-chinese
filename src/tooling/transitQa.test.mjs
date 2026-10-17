@@ -674,13 +674,11 @@ test('public transit documentation uses courtesy attribution and the approved gr
     'utf8',
   );
   assert.ok(
-    readme.includes(
-      'Twenty layers and map sources. **Eighteen have a keyless path.**',
-    ),
+    readme.includes('二十个图层和地图源。**其中十八个无需密钥。**'),
   );
   assert.ok(
     readme.includes(
-      '**Sits on the real ground.** Entity heights are aligned to work with Google 3D tiles, so aircraft park on aprons and cameras stand on street corners instead of floating.',
+      '**贴在真实地面上。** 实体高度与 Google 3D 瓦片对齐，因此飞机停在停机坪上，摄像头立在街角，而不是悬在空中。',
     ),
   );
   assert.doesNotMatch(
